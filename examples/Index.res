@@ -54,11 +54,15 @@ module BasicUsage = {
 }
 
 switch ReactDOM.querySelector("#counter") {
-| Some(root) => ReactDOM.render(<Counter />, root)
+| Some(element) =>
+  let root = ReactDOM.Client.createRoot(element)
+  ReactDOM.Client.Root.render(root, <Counter />)
 | None => ()
 }
 
 switch ReactDOM.querySelector("#basic") {
-| Some(root) => ReactDOM.render(<BasicUsage />, root)
+| Some(element) =>
+  let root = ReactDOM.Client.createRoot(element)
+  ReactDOM.Client.Root.render(root, <BasicUsage />)
 | None => ()
 }

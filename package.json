@@ -2,11 +2,11 @@
   "name": "rescript-react-update",
   "version": "5.0.2",
   "scripts": {
-    "build": "bsb -make-world",
-    "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world",
-    "test": "bsb -make-world",
-    "dev": "bsb -make-world && parcel examples/index.html"
+    "build": "rescript build",
+    "start": "rescript build -with-deps -w",
+    "clean": "rescript -clean-world",
+    "test": "rescript build",
+    "dev": "rescript build && parcel examples/index.html"
   },
   "bugs": "https://github.com/bloodyowl/rescript-react-update/issues",
   "repository": {
@@ -21,15 +21,19 @@
   "author": "bloodyowl <bloodyowl@icloud.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@rescript/react": "^0.10.1 || ^0.11.0",
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "@rescript/react": "0.14.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@rescript/react": "^0.10.1",
-    "bs-platform": "^8.3.0",
-    "parcel-bundler": "^1.12.5",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "@rescript/react": "0.14.0",
+    "rescript": "12.0.0-alpha.4",
+    "parcel": "^2.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "volta": {
+    "node": "22.12.0",
+    "yarn": "1.22.22"
   }
 }

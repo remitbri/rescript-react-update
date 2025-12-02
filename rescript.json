@@ -1,8 +1,6 @@
 {
   "name": "rescript-react-update",
-  "reason": {
-    "react-jsx": 3
-  },
+  "jsx": { "version": 4 },
   "sources": [
     {
       "dir": "src",
@@ -16,14 +14,13 @@
   ],
   "package-specs": [
     {
-      "module": "es6",
+      "module": "esmodule",
       "in-source": true
     }
   ],
   "warnings": {
     "number": "-30"
   },
-  "suffix": ".bs.js",
-  "bs-dependencies": ["@rescript/react"],
-  "refmt": 3
+  "suffix": ".mjs",
+  "bs-dependencies": ["@rescript/react"]
 }
