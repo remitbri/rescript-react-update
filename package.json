@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rescript build",
     "start": "rescript build -with-deps -w",
-    "clean": "rescript -clean-world",
+    "clean": "rescript clean",
     "test": "rescript build",
     "dev": "rescript build && parcel examples/index.html"
   },
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@rescript/react": "0.14.0",
-    "rescript": "12.0.0-alpha.4",
+    "rescript": "12.0.0-alpha.5",
     "parcel": "^2.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0"
