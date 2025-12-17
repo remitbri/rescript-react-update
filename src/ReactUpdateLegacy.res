@@ -1,5 +1,3 @@
-open Belt
-
 type rec update<'action, 'state> =
   | NoUpdate
   | Update('state)
@@ -18,9 +16,9 @@ let useReducer = (initialState, reducer) => {
   let ({state, sideEffects}, send) = React.useReducer(({state, sideEffects} as fullState, action) =>
     switch reducer(action, state) {
     | NoUpdate => fullState
-    | Update(state) => {...fullState, state: state}
+    | Update(state) => {...fullState, state}
     | UpdateWithSideEffects(state, sideEffect) => {
-        state: state,
+        state,
         sideEffects: ref(Array.concat(sideEffects.contents, [sideEffect])),
       }
     | SideEffects(sideEffect) => {
@@ -33,7 +31,7 @@ let useReducer = (initialState, reducer) => {
     if Array.length(sideEffects.contents) > 0 {
       let sideEffectsToRun = Js.Array.sliceFrom(0, sideEffects.contents)
       sideEffects := []
-      Array.forEach(sideEffectsToRun, func => func({state: state, send: send}))
+      Array.forEach(sideEffectsToRun, func => func({state, send}))
     }
     None
   }, [sideEffects])
@@ -45,9 +43,9 @@ let useReducerWithMapState = (getInitialState, reducer) => {
     ({state, sideEffects} as fullState, action) =>
       switch reducer(action, state) {
       | NoUpdate => fullState
-      | Update(state) => {...fullState, state: state}
+      | Update(state) => {...fullState, state}
       | UpdateWithSideEffects(state, sideEffect) => {
-          state: state,
+          state,
           sideEffects: ref(Array.concat(sideEffects.contents, [sideEffect])),
         }
       | SideEffects(sideEffect) => {
@@ -62,7 +60,7 @@ let useReducerWithMapState = (getInitialState, reducer) => {
     if Array.length(sideEffects.contents) > 0 {
       let sideEffectsToRun = Js.Array.sliceFrom(0, sideEffects.contents)
       sideEffects := []
-      Array.forEach(sideEffectsToRun, func => func({state: state, send: send}))
+      Array.forEach(sideEffectsToRun, func => func({state, send}))
     }
     None
   }, [sideEffects])

@@ -1,7 +1,7 @@
 {
   "name": "rescript-react-update",
-  "reason": {
-    "react-jsx": 3
+  "jsx": {
+    "version": 4
   },
   "sources": [
     {
@@ -23,7 +23,6 @@
   "warnings": {
     "number": "-30"
   },
-  "suffix": ".bs.js",
-  "bs-dependencies": ["@rescript/react"],
-  "refmt": 3
+  "suffix": ".mjs",
+  "dependencies": ["@rescript/react"]
 }

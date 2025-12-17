@@ -34,8 +34,8 @@ module BasicUsage = {
           UpdateWithSideEffects(
             {elapsed: state.elapsed + 1},
             ({send}) => {
-              let timeoutId = Js.Global.setTimeout(() => send(Tick), 1_000)
-              Some(() => Js.Global.clearTimeout(timeoutId))
+              let timeoutId = setTimeout(() => send(Tick), 1_000)
+              Some(() => clearTimeout(timeoutId))
             },
           )
         | Reset => Update({elapsed: 0})
@@ -47,18 +47,18 @@ module BasicUsage = {
       None
     })
     <div>
-      {state.elapsed->Js.String.make->React.string}
+      {state.elapsed->String.make->React.string}
       <button onClick={_ => send(Reset)}> {"Reset"->React.string} </button>
     </div>
   }
 }
 
 switch ReactDOM.querySelector("#counter") {
-| Some(root) => ReactDOM.render(<Counter />, root)
+| Some(root) => ReactDOM.Client.createRoot(root)->ReactDOM.Client.Root.render(<Counter />)
 | None => ()
 }
 
 switch ReactDOM.querySelector("#basic") {
-| Some(root) => ReactDOM.render(<BasicUsage />, root)
+| Some(root) => ReactDOM.Client.createRoot(root)->ReactDOM.Client.Root.render(<BasicUsage />)
 | None => ()
 }

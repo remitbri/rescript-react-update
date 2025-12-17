@@ -1,5 +1,3 @@
-open Belt
-
 type dispatch<'action> = 'action => unit
 
 type rec update<'action, 'state> =
@@ -24,9 +22,9 @@ let useReducer = (reducer, initialState) => {
   let ({state, sideEffects}, send) = React.useReducer(({state, sideEffects} as fullState, action) =>
     switch reducer(state, action) {
     | NoUpdate => fullState
-    | Update(state) => {...fullState, state: state}
+    | Update(state) => {...fullState, state}
     | UpdateWithSideEffects(state, sideEffect) => {
-        state: state,
+        state,
         sideEffects: ref(Array.concat(sideEffects.contents, [sideEffect])),
       }
     | SideEffects(sideEffect) => {
@@ -39,16 +37,16 @@ let useReducer = (reducer, initialState) => {
     if Array.length(sideEffects.contents) > 0 {
       let sideEffectsToRun = Js.Array.sliceFrom(0, sideEffects.contents)
       sideEffects := []
-      let cancelFuncs = Array.keepMap(sideEffectsToRun, func =>
-        func({state: state, send: send, dispatch: send})
+      let cancelFuncs = Belt.Array.keepMap(sideEffectsToRun, func =>
+        func({state, send, dispatch: send})
       )
-      let _ = cleanupEffects.current->Js.Array2.pushMany(cancelFuncs)
+      let _ = cleanupEffects.current->Array.pushMany(cancelFuncs)
     }
     None
   }, [sideEffects])
 
   React.useEffect0(() => {
-    Some(() => cleanupEffects.current->Js.Array2.forEach(cb => cb()))
+    Some(() => cleanupEffects.current->Array.forEach(cb => cb()))
   })
   (state, send)
 }
@@ -59,9 +57,9 @@ let useReducerWithMapState = (reducer, getInitialState) => {
     ({state, sideEffects} as fullState, action) =>
       switch reducer(state, action) {
       | NoUpdate => fullState
-      | Update(state) => {...fullState, state: state}
+      | Update(state) => {...fullState, state}
       | UpdateWithSideEffects(state, sideEffect) => {
-          state: state,
+          state,
           sideEffects: ref(Array.concat(sideEffects.contents, [sideEffect])),
         }
       | SideEffects(sideEffect) => {
@@ -76,16 +74,16 @@ let useReducerWithMapState = (reducer, getInitialState) => {
     if Array.length(sideEffects.contents) > 0 {
       let sideEffectsToRun = Js.Array.sliceFrom(0, sideEffects.contents)
       sideEffects := []
-      let cancelFuncs = Array.keepMap(sideEffectsToRun, func =>
-        func({state: state, send: send, dispatch: send})
+      let cancelFuncs = Belt.Array.keepMap(sideEffectsToRun, func =>
+        func({state, send, dispatch: send})
       )
-      let _ = cleanupEffects.current->Js.Array2.pushMany(cancelFuncs)
+      let _ = cleanupEffects.current->Array.pushMany(cancelFuncs)
     }
     None
   }, [sideEffects])
 
   React.useEffect0(() => {
-    Some(() => cleanupEffects.current->Js.Array2.forEach(cb => cb()))
+    Some(() => cleanupEffects.current->Array.forEach(cb => cb()))
   })
   (state, send)
 }
