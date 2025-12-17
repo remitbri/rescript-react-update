@@ -1,6 +1,6 @@
 {
   "name": "rescript-react-update",
-  "version": "5.0.2",
+  "version": "6.0.0",
   "scripts": {
     "build": "rescript build",
     "start": "rescript watch",
@@ -27,9 +27,9 @@
   },
   "devDependencies": {
     "@rescript/react": "^0.14.0",
-    "rescript": "^12.0.1",
     "parcel-bundler": "^1.12.5",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "rescript": "^12.0.1"
   }
 }
