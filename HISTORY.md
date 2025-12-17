@@ -1,3 +1,9 @@
+## 6.0.0
+
+Changes:
+
+- Upgrade to ReScript 12 and React 19 (5f47907)
+
 ## 5.0.2
 
 Changes:
